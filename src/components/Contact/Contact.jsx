@@ -1,15 +1,30 @@
-const Contact = ({ id, name, number }) => {
+import { IoIosContact } from "react-icons/io";
+import { MdPhoneInTalk } from "react-icons/md";
+import styles from "./Contact.module.scss";
+
+const Contact = ({ id, number, name, onDelete }) => {
   return (
-    <li>
-      <div>
-        <div>
-          <span>{name}</span>
+    <li className={styles["contact-card"]}>
+      <div className={styles["contact-details"]}>
+        <div className={styles["contact-row"]}>
+          <IoIosContact className={styles["contact-icon"]} />
+          <span className={styles["contact-name"]}>{name}</span>
         </div>
-        <div>
-          <a href="">{number}</a>
+        <div className={styles["contact-row"]}>
+          <MdPhoneInTalk className={styles["contact-icon"]} />
+          <a href={`tel:${number}`} className={styles["contact-number"]}>
+            {number}
+          </a>
         </div>
       </div>
-      <button type="button">Delete</button>
+      <button
+        onClick={() => onDelete(id)}
+        type="button"
+        aria-label="delete button"
+        className={styles["delete-btn"]}
+      >
+        Delete
+      </button>
     </li>
   );
 };
